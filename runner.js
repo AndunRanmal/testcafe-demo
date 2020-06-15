@@ -14,7 +14,11 @@ createTestCafe('localhost', 1337, 1338)
                 name: 'html',
                 output: 'reports/report.html'
             }])
-            .run();
+            .run(
+                {
+                    "skipJsErrors": true
+                }
+            );
     })
     .then(failedCount => {
         console.log('Tests failed: ' + failedCount);
