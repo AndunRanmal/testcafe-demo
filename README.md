@@ -69,7 +69,7 @@ Create directory named fixtures/ in your project add create a test.js file insid
 
 Testcafe tests are organized in to categories called fixtures. Fixture can contain multiple tests. As per an example in my project I was using one fixture to test all the test scenarios related to login page. In this way you can organize your test cases as your need. And page user should should navigated can be defined with fixture.page() function. All the tests in this fixture begin execution after navigating to this web page
 
-```
+```js
 fixture `WileyPlus login page`
     .page(`https://education.wiley.com/`)
 
@@ -81,4 +81,33 @@ test('Student login with correct username and password', async t => {
     /* Test 2 Code */
 });
 ```
+
+`t` is the testcafe object and it contains several functions to emulate user functions such as .typeText(), click(), expect(). All these functions are async functions. Now add some user functions using those provided methods and capturing elements in web page
+
+First we have to import necessary modules from testcafe to capture elements
+
+`import { Selector } from 'testcafe';`
+
+Then we can use different methods to capture the elements, like by element id, class, or by elements' attributes
+
+```js
+import { Selector } from 'testcafe';
+
+
+fixture `WileyPlus login page`
+    .page(`https://education.wiley.com/`)
+
+test('login as instructor', async t => {
+    await t
+    .typeText(Selector('input[type=email]'),"instructor01")
+    .typeText(Selector('input[type=password]'), "instructor_123")
+    .click(Selector('.login-form__buttons').child(0))
+    .expect(Selector('.user-badge__role').innerText).eql('Instructor')
+})
+```
+
+In the above code snippet i have used input attribute to capture the elements for username and password text boxes and for login button and users' badge using elements' class. Now you can execute the tests.
+
+### Step 3: Execute testcafe tests
+
 
