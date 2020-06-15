@@ -15,4 +15,24 @@ Most of the legacy automation tools were relied on webdriver, which emulate the 
 * Boilerplate code
 * Low automation
 
+Testcafe is different, the idea that defined testcafe was you really don't need an external web driver to run end to end tests in the web browser, instead page can run all the scripts that emulate user actions. This architecture allows to run your end to end test scripts with cross browsers in cross platforms in any device. 
 
+## What testcafe offers you
+
+Following features makes Testcafe more special from other end to end test frameworks.
+
+### 1. Create stable tests
+
+With testcafe there are no manual timeouts, it automatically waits for page loads and XHRs to be executed before each actions to be executed. You can configure this timeout as you required if the elements load faster.
+
+### 2. Write in latest JS or Typescripts
+
+### 3. Detect Js errors in your code
+
+### 4. Launch concurrent tests
+
+### 5. Build readable tests with page objects
+
+### 6. Include tests in continuous integration system
+
+### 7. Rapid test development
