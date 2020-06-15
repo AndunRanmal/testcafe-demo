@@ -27,12 +27,24 @@ With testcafe there are no manual timeouts, it automatically waits for page load
 
 ### 2. Write in latest JS or Typescripts
 
+Testcafe supports latest javascript features, if you prefer more of a typed language you have the capability to use Typescript in writing your tests.
+
 ### 3. Detect Js errors in your code
+
+With this features you can find if any js errors containing in the testing web page. If any errors found your test case will be failed. This feature is enabled in default. So if your test case execution fails without actually running the test script. This could be one of the reason. So if you wants to ignore those errors, you can disable it when running your test scripts.
 
 ### 4. Launch concurrent tests
 
+This is one of my favourite feature in testcafe. You can run your tests parallelly opening multiple instance of the same browser. With this feature you can decrease the test execution time of your test suite.
+
 ### 5. Build readable tests with page objects
+
+Page object modal is a test automation pattern use commonly with node js test frameworks. This allows you to create an abstraction of the tested page and use it in test code to refer the elements. As the testcafe's test API includes high level high level selector libraries, assertions and etc, you can combine them to implement readable tests with Page Objects. 
 
 ### 6. Include tests in continuous integration system
 
+With the enability of headless mode you can execute test in a console and its reports can be viewed in a CI's system interface
+
 ### 7. Rapid test development
+
+This is one of the new feature introduced by the tescafe named Live mode. This allows you to edit your testcafe tests on the fly. Changes you made on your tests will immediately restart the test and you will see test results instantly.  
