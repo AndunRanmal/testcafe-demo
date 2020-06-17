@@ -110,4 +110,42 @@ In the above code snippet i have used input attribute to capture the elements fo
 
 ### Step 3: Execute testcafe tests
 
+There are 2 ways you can execute your tests.
 
+1. From a command shell
+2. By creating runner class
+
+Let's first consider the first one.
+
+#### From a command shell
+
+With `testcafe chrome fixtures/test.js` command you can execute your test file. In here we are executing the test file by giving the path to the test file and specifying the browser.  For further information you can specify here other configurations as well. As an example to create a report by giving the `--reporter` option, and to save screenshots of failed test using option `--screenshots`
+
+You can find all the options related to CLI from testcafe documented link https://devexpress.github.io/testcafe/documentation/reference/command-line-interface.html
+
+#### By creating runner class
+
+This is the most recommended way for your test framework. You can create a runner class and specify all the required option in here.
+Following is the most basic test runner class you can create. 
+
+```js
+const createTestCafe = require('testcafe');
+let testcafe         = null;
+
+createTestCafe('localhost', 1337, 1338)
+    .then(tc => {
+        testcafe     = tc;
+        const runner = testcafe.createRunner();
+
+        return runner
+            .src(['fixtures/'])
+            .browsers(['chrome'])
+            .run();
+    })
+    .then(failedCount => {
+        console.log('Tests failed: ' + failedCount);
+        testcafe.close();
+    });
+```
+
+With runner.src() function you define the path to test scripts, and with runner.browser() function you can specify all the browsers as a list that you wants to execute the tests. This will run your tests in multiple browsers in parallelly.
