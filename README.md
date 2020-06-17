@@ -55,7 +55,7 @@ This is one of the new feature introduced by the tescafe named Live mode. This a
 
 Ensure that Node.js and npm are installed on your computer and run the following command
 
-`npm install -g testcafe`
+`$npm install -g testcafe`
 
 ### Step 2: Create a node project
 
@@ -119,7 +119,7 @@ Let's first consider the first one.
 
 #### From a command shell
 
-With `testcafe chrome fixtures/test.js` command you can execute your test file. In here we are executing the test file by giving the path to the test file and specifying the browser.  For further information you can specify here other configurations as well. As an example to create a report by giving the `--reporter` option, and to save screenshots of failed test using option `--screenshots`
+With `$testcafe chrome fixtures/test.js` command you can execute your test file. In here we are executing the test file by giving the path to the test file and specifying the browser.  For further information you can specify here other configurations as well. As an example to create a report by giving the `--reporter` option, and to save screenshots of failed test using option `--screenshots`
 
 You can find all the options related to CLI from testcafe documented link https://devexpress.github.io/testcafe/documentation/reference/command-line-interface.html
 
@@ -149,3 +149,35 @@ createTestCafe('localhost', 1337, 1338)
 ```
 
 With runner.src() function you define the path to test scripts, and with runner.browser() function you can specify all the browsers as a list that you wants to execute the tests. This will run your tests in multiple browsers in parallelly.
+
+If you want you can up multiple instances from the same browser and run you tests concurrently with `runner.concurrency()` function. With it you can reduce the execution time for your test suite.
+
+### Generate reports
+
+There are many plugins to output test reports with Testcafe, or you can create your own plugin for your needs. In here I will use an html report plugin developed by testcafe community. You can install it with `$npm install --save testcafe-reporter-html`, and you can update your runner class as follows.
+
+```js
+const createTestCafe = require('testcafe');
+let testcafe         = null;
+
+createTestCafe('localhost', 1337, 1338)
+    .then(tc => {
+        testcafe     = tc;
+        const runner = testcafe.createRunner();
+
+        return runner
+            .src(['fixtures/'])
+            .browsers(['chrome'])
+            .reporter(['spec', {
+                name: 'html',
+                output: 'reports/report.html'
+            }])
+            .run();
+    })
+    .then(failedCount => {
+        console.log('Tests failed: ' + failedCount);
+        testcafe.close();
+    });
+```
+
+With execution of runner class now you can have a nice clean html report.
