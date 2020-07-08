@@ -71,13 +71,13 @@ Testcafe tests are organized in to categories called fixtures. Fixture can conta
 
 ```js
 fixture `WileyPlus login page`
-    .page(`https://education.wiley.com/`)
+    .page(`http://automationpractice.com/index.php?id_category=3&controller=category`)
 
-test('Instructor login with correct username and password', async t => {
+test('login with correct username and password', async t => {
     /* Test 1 Code */
 });
 
-test('Student login with correct username and password', async t => {
+test('login with correct username and incorrect password', async t => {
     /* Test 2 Code */
 });
 ```
@@ -95,15 +95,18 @@ import { Selector } from 'testcafe';
 
 
 fixture `WileyPlus login page`
-    .page(`https://education.wiley.com/`)
+    .page(`http://automationpractice.com/index.php?id_category=3&controller=category`)
 
-test('login as instructor', async t => {
+test('login with correct username and password', async t => {
     await t
-    .typeText(Selector('input[type=email]'),"instructor01")
-    .typeText(Selector('input[type=password]'), "instructor_123")
-    .click(Selector('.login-form__buttons').child(0))
-    .expect(Selector('.user-badge__role').innerText).eql('Instructor')
+    .click(loginPage.signIn)
+    .typeText(Selector(loginPage.nameInput), "andunranmal@gmail.com")
+    .typeText(Selector(loginPage.passwordInput), "123456")
+    .click(loginPage.loginButton)
+    .wait(10000)
+    .expect((loginPage.userRoleBadge).innerText).eql('Andun Ranmal')
 })
+
 ```
 
 In the above code snippet i have used input attribute to capture the elements for username and password text boxes and for login button and users' badge using elements' class. Now you can execute the tests.

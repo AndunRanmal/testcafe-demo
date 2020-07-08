@@ -8,8 +8,8 @@ createTestCafe('localhost', 1337, 1338)
 
         return runner
             .src(['tests/'])
-            .browsers(['chrome'])
-            .concurrency(2)
+            .browsers(['chrome','firefox'])
+            .concurrency(1)
             .reporter(['spec', {
                 name: 'html',
                 output: 'reports/report.html'

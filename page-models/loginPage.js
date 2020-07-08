@@ -2,10 +2,12 @@ import { Selector } from 'testcafe';
 
 class LoginPage {
     constructor () {
-        this.nameInput = Selector('input[type=email]');
-        this.passwordInput = Selector('input[type=password]');
-        this.loginButton = Selector('.login-form__buttons').child(0);
-        this.userRoleBadge = Selector('.user-badge__role');
+        this.signIn = Selector('.login')
+        this.nameInput = Selector('#email');
+        this.passwordInput = Selector('#passwd');
+        this.loginButton = Selector('#SubmitLogin');
+        this.userRoleBadge = Selector('.account');
+        this.errorMessage = Selector('.alert-danger').child(1).child(0);
     }
 }
 

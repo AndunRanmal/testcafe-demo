@@ -3,21 +3,23 @@ import loginPage from '../page-models/loginPage';
 require('dotenv').config()
 
 fixture `login scenarios`
-    .page `https://education-qa.wiley.com/`;
+    .page `http://automationpractice.com/index.php?id_category=3&controller=category`;
 
-test('login as instructor', async t => {
+test('login with correct username and password', async t => {
     await t
-    .typeText(Selector(loginPage.nameInput), process.env.INSTRUCTOR_EMAIL)
-    .typeText(Selector(loginPage.passwordInput), process.env.INSTRUCTOR_PASSWORD)
+    .click(loginPage.signIn)
+    .typeText(Selector(loginPage.nameInput), "andunranmal@gmail.com")
+    .typeText(Selector(loginPage.passwordInput), "123456")
     .click(loginPage.loginButton)
     .wait(10000)
-    .expect((loginPage.userRoleBadge).innerText).eql('Instructor')
+    .expect((loginPage.userRoleBadge).innerText).eql('Andun Ranmal')
 })
 
-test('login as student', async t => {
+test('login with correct username and incorrect password', async t => {
     await t
-    .typeText(Selector(loginPage.nameInput), process.env.STUDENT_EMAIL)
-    .typeText(Selector(loginPage.passwordInput), process.env.STUDENT_PASSWORD)
+    .click(loginPage.signIn)
+    .typeText(Selector(loginPage.nameInput), "andunranmal@gmail.com")
+    .typeText(Selector(loginPage.passwordInput), "1234567")
     .click(loginPage.loginButton)
-    .expect((loginPage.userRoleBadge).innerText).eql('Student')
+    .expect((loginPage.errorMessage).innerText).eql('Authentication failed.')
 })
